@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  user_service:
+    build: ./user_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./user_service:/app
+    environment:
+      - ENV=production
+    networks:
+      - microservices_network
+
+  post_service:
+    build: ./post_service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./post_service:/app
+    environment:
+      - ENV=production
+    networks:
+      - microservices_network
+
+networks:
+  microservices_network:
+    driver: bridge
